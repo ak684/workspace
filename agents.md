@@ -81,7 +81,7 @@ Run relevant tests before creating PR:
 ### CI Checks
 After creating a PR, monitor CI status:
 - **Wait for**: Lint jobs, test jobs, and other quick validation checks
-- **DO NOT wait for**: Docker builds, runtime image builds, or any long-running build/image jobs (these can take 40+ minutes and generally if everything else is passing these have a view high rate of passing)
+- **DO NOT wait for**: Docker builds, runtime image builds, or any long-running build/image jobs (these can take 40+ minutes and generally if everything else is passing these have a very high rate of passing)
 - Consider CI "passed" once all lint and test jobs succeed, even if Docker/build jobs are still running or pending
 - If a lint or test job fails, fix it and push
 
@@ -97,10 +97,15 @@ After creating a PR, monitor CI status:
 When creating a PR:
 1. Create the PR with a clear description
 2. Immediately add comment: `@OpenHands /codereview`
-3. Wait for code review feedback
-4. **Address feedback FIRST** - Push a commit addressing the feedback (or simply acknowledge if no code changes needed).
-5. **THEN check CI** - Check if lint/test jobs are passing and fix any failures
-6. Mark as complete when lint and test jobs pass (you do not wait for Docker/build jobs) 
+3. **Wait for code review feedback** - Poll the PR comments every 60-120 seconds until OpenHands responds with review feedback. Do not proceed until you receive the review.
+4. **Address feedback** - Push a commit addressing the feedback (or simply acknowledge if no code changes needed).
+5. **Check CI** - Check if lint/test jobs are passing and fix any failures
+6. Mark as complete when lint and test jobs pass (do not wait for Docker/build jobs)
+
+**IMPORTANT: You are NOT finished until you have:**
+- Waited for and received the code review feedback (sleep 60-120 seconds and poll)
+- Responded to or acknowledged the review with a commit or comment
+- Confirmed critical CI checks (lint, tests) are passing
 
 ## Principles
 

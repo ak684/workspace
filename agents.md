@@ -42,7 +42,7 @@ The `gh` CLI is available and configured. Use it for cloning repos, creating PRs
 
 When you see errors from a service (e.g., `service:deploy`), clone the corresponding repo to investigate. **If the root cause is not in that repo, clone additional repos as needed.** Follow the code path across repos until you find the actual source of the issue.
 
-## Workflow
+## Investigation Workflow
 
 When debugging production issues:
 
@@ -72,7 +72,7 @@ Before creating a PR, run the appropriate linter for the repo:
 
 **Important:** The enterprise directory has a SEPARATE lint config. If you modify files in `enterprise/`, you MUST run the enterprise linter.
 
-If you are not in the OpenHands directory than try to look for the lint commands in `.pre-commit-config.yaml`, `Makefile`, or CI workflow files to run. MAKE SURE TO ONLY run commands for code that you changed though. If you run lint on the entire repo and change a bunch of unrelated files, you will almost always fail the CI lint job for whatever repo you are trying to change.
+If you are not in the OpenHands directory then try to look for the lint commands in `.pre-commit-config.yaml`, `Makefile`, or CI workflow files to run. MAKE SURE TO ONLY run commands for code that you changed though. If you run lint on the entire repo and change a bunch of unrelated files, you will almost always fail the CI lint job for whatever repo you are trying to change.
 
 ### Tests
 Run relevant tests before creating PR:
@@ -92,7 +92,7 @@ After creating a PR, monitor CI status:
 - Do not add celebratory or overly enthusiastic follow-up comments or PR follow-up comments
 - State facts, code evidence, log evidence, but not feelings
 
-## PR Workflow
+## After Creating PR
 
 When creating a PR:
 1. Create the PR with a clear description

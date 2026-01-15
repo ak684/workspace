@@ -26,19 +26,20 @@ You have access to GitHub for code, PRs, issues, and comments.
 
 **Environment variable:** `GITHUB_PAT` - Use this for authentication
 
-The `gh` CLI is available and configured. Use it for:
-- Cloning repositories
-- Creating and viewing PRs
-- Adding comments to PRs and issues
-- Creating issues
+The `gh` CLI is available and configured. Use it for cloning repos, creating PRs, adding comments, and creating issues.
 
-## Relevant Repositories
+## OpenHands Repositories
 
-When investigating OpenHands issues:
-- `OpenHands/OpenHands` - Main codebase
-- `OpenHands/deploy` - Enterprise server, sync scripts
-- `All-Hands-AI/infra` - Infrastructure, Kubernetes configs
-- `OpenHands/runtime-api` - Runtime API service
+| Service/Component | Repository | Git URL |
+|------------------|------------|---------|
+| Main codebase | OpenHands/OpenHands | https://github.com/OpenHands/OpenHands.git |
+| Enterprise server, sync scripts | OpenHands/deploy | https://github.com/OpenHands/deploy.git |
+| Infrastructure, K8s configs | All-Hands-AI/infra | https://github.com/All-Hands-AI/infra.git |
+| Runtime API | OpenHands/runtime-api | https://github.com/OpenHands/runtime-api.git |
+| GitHub resolver | OpenHands/openhands-resolver | https://github.com/OpenHands/openhands-resolver.git |
+| Agent SDK | OpenHands/software-agent-sdk | https://github.com/OpenHands/software-agent-sdk.git |
+
+When you see errors from a service (e.g., `service:deploy`), clone the corresponding repo to investigate.
 
 ## Workflow
 

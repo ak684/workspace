@@ -100,7 +100,7 @@ When creating a PR:
 3. Wait for code review feedback
 4. **Address feedback FIRST** - Push a commit addressing the feedback (or acknowledge if no changes needed)
 5. **THEN check CI** - Check if lint/test jobs are passing and fix any failures
-6. Mark as complete when lint and test jobs pass (do not wait for Docker/build jobs)
+6. Mark as complete when lint and test jobs pass (you do not wait for Docker/build jobs)
 
 ## Principles
 

@@ -52,7 +52,8 @@ When debugging production issues:
 4. **Validate** - Run linting and tests (see below). Fix any issues before creating PR.
 5. **PR** - Create a clear PR explaining what, why, and how
 6. **Code Review** - After creating the PR, add a comment: `@OpenHands /codereview` and wait for feedback
-7. **CI Check** - After code review, check if CI is passing. If not, fix the issues and push again.
+7. **Address Feedback** - Respond to code review with a commit (or acknowledge if no changes needed)
+8. **CI Check** - Check if CI lint/test jobs are passing. If not, fix and push again.
 
 ## Code Quality Requirements
 
@@ -71,18 +72,18 @@ Before creating a PR, run the appropriate linter for the repo:
 
 **Important:** The enterprise directory has a SEPARATE lint config. If you modify files in `enterprise/`, you MUST run the enterprise linter.
 
-If you're not in the OpenHands directory than try to look for the lint commands in `.pre-commit-config.yaml`, `Makefile`, or CI workflow files to run. MAKE SURE TO ONLY run commands for code that you changed though. If you run lint on the entire repo and change a bunch of unrelated files, you will almost always fail the CI lint job for whatever repo you're trying to change.
+If you are not in the OpenHands directory than try to look for the lint commands in `.pre-commit-config.yaml`, `Makefile`, or CI workflow files to run. MAKE SURE TO ONLY run commands for code that you changed though. If you run lint on the entire repo and change a bunch of unrelated files, you will almost always fail the CI lint job for whatever repo you are trying to change.
 
 ### Tests
 Run relevant tests before creating PR:
 - `pytest path/to/test_file.py -v`
 
-### CI Failures
-After creating a PR, wait in a loop and monitor CI status. If CI fails:
-1. Check which job failed using `gh pr checks <PR_NUMBER> --repo <REPO>`
-2. Fix the issue
-3. Push the fix
-4. Repeat until CI passes
+### CI Checks
+After creating a PR, monitor CI status:
+- **Wait for**: Lint jobs, test jobs, and other quick validation checks
+- **DO NOT wait for**: Docker builds, runtime image builds, or any long-running build/image jobs (these can take 40+ minutes and are not relevant to code validation)
+- Consider CI "passed" once all lint and test jobs succeed, even if Docker/build jobs are still running or pending
+- If a lint or test job fails, fix it and push
 
 ## Communication Style
 
@@ -97,10 +98,9 @@ When creating a PR:
 1. Create the PR with a clear description
 2. Immediately add comment: `@OpenHands /codereview`
 3. Wait for code review feedback
-4. Address any feedback (but use your own reasoning to determine what feedback makes sense and what does not)
-5. Check CI status and fix any failures
-6. Wait for CI to fully pass
-7. Only mark as complete when CI is passing
+4. **Address feedback FIRST** - Push a commit addressing the feedback (or acknowledge if no changes needed)
+5. **THEN check CI** - Check if lint/test jobs are passing and fix any failures
+6. Mark as complete when lint and test jobs pass (do not wait for Docker/build jobs)
 
 ## Principles
 
@@ -108,5 +108,5 @@ When creating a PR:
 - Follow existing code patterns exactly
 - Do not change code style (quotes, formatting) unless specifically asked
 - Run the correct linter for the directory you modified
-- Ensure CI passes before considering the task complete
+- Ensure lint and test CI jobs pass before considering the task complete
 

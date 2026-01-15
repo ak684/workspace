@@ -36,6 +36,7 @@ The `gh` CLI is available and configured. Use it for cloning repos, creating PRs
 | Enterprise server, sync scripts | OpenHands/deploy | https://github.com/OpenHands/deploy.git |
 | Infrastructure, K8s configs | All-Hands-AI/infra | https://github.com/All-Hands-AI/infra.git |
 | Runtime API | OpenHands/runtime-api | https://github.com/OpenHands/runtime-api.git |
+| CLI tool | OpenHands/openhands-cli | https://github.com/OpenHands/openhands-cli.git |
 | GitHub resolver | OpenHands/openhands-resolver | https://github.com/OpenHands/openhands-resolver.git |
 | Agent SDK | OpenHands/software-agent-sdk | https://github.com/OpenHands/software-agent-sdk.git |
 

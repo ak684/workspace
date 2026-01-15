@@ -40,70 +40,39 @@ The `gh` CLI is available and configured. Use it for cloning repos, creating PRs
 | GitHub resolver | OpenHands/openhands-resolver | https://github.com/OpenHands/openhands-resolver.git |
 | Agent SDK | OpenHands/software-agent-sdk | https://github.com/OpenHands/software-agent-sdk.git |
 
-When you see errors from a service (e.g., `service:deploy`), clone the corresponding repo to investigate. **If the root cause is not in that repo, clone additional repos as needed.** Follow the code path across repos until you find the actual source of the issue.
+When you see errors from a service (e.g., `service:deploy`), clone the corresponding repo to investigate. If the root cause is not in that repo, clone additional repos as needed. Follow the code path across repos until you find the actual source of the issue.
 
 ## Workflow
 
 When debugging production issues:
 
 1. **Investigate** - Query Datadog logs, check Linear/GitHub for context
-2. **Root cause** - Clone the relevant repo, trace the error to its source. If the code lives in a different repo, clone that too. Keep investigating until you find the actual root cause.
+2. **Root cause** - Clone the relevant repo, trace the error to its source. If the code lives in a different repo, clone that too.
 3. **Fix** - Write minimal, focused code changes following existing patterns
 4. **Validate** - Run linting and tests (see below). Fix any issues before creating PR.
 5. **PR** - Create a clear PR explaining what, why, and how
 6. **Code Review** - After creating the PR, add a comment: `@OpenHands /codereview` and wait for feedback
 7. **CI Check** - After code review, check if CI is passing. If not, fix the issues and push again.
 
-## Code Quality Requirements
+## Before Creating PR
 
-### CRITICAL: Only change what is necessary
-- **DO NOT** run auto-formatters that change unrelated code (like changing quote styles)
-- **DO NOT** make style changes to code you are not fixing
-- **DO NOT** refactor or clean up code outside the scope of the fix
-- Only modify the specific lines needed to fix the issue
+- Run the repo linter if one exists (check for `.pre-commit-config.yaml`, `Makefile`, or CI workflow files)
+- If lint fails, fix only the specific issues reported
+- DO NOT run auto-formatters that change code style globally (like `ruff format`, `black`, etc.)
+- Only modify the lines necessary to fix the actual issue
+- Run relevant tests if they exist
 
-### Linting
-Before creating a PR, run the appropriate linter for the repo:
-
-**For OpenHands/OpenHands:**
-- Main code: `pre-commit run --all-files --config ./dev_config/python/.pre-commit-config.yaml`
-- Enterprise code: `cd enterprise && pre-commit run --all-files --config ./dev_config/python/.pre-commit-config.yaml`
-
-**Important:** The enterprise directory has a SEPARATE lint config. If you modify files in `enterprise/`, you MUST run the enterprise linter.
-
-### Tests
-Run relevant tests before creating PR:
-- `pytest path/to/test_file.py -v`
-
-### CI Failures
-After creating a PR, monitor CI status. If CI fails:
-1. Check which job failed using `gh pr checks <PR_NUMBER> --repo <REPO>`
-2. Fix the issue
-3. Push the fix
-4. Repeat until CI passes
-
-## Communication Style
-
-- **NO EMOJIS** in PR descriptions, comments, or any text
-- Be concise and professional
-- Do not add celebratory or overly enthusiastic follow-up comments
-- State facts, not feelings
-
-## PR Workflow
-
-When creating a PR:
-1. Create the PR with a clear description
-2. Immediately add comment: `@OpenHands /codereview`
-3. Wait for code review feedback
-4. Address any feedback
-5. Check CI status and fix any failures
-6. Only mark as complete when CI is passing
-
-## Principles
+## Code Quality
 
 - Keep changes minimal and focused - only touch what is necessary
 - Follow existing code patterns exactly
-- Do not change code style (quotes, formatting) unless specifically asked
-- Run the correct linter for the directory you modified
+- Do not change code style (quotes, formatting) in code you are not fixing
 - Ensure CI passes before considering the task complete
+
+## Communication Style
+
+- NO EMOJIS in PR descriptions, comments, or any text
+- Be concise and professional
+- Do not add celebratory or overly enthusiastic follow-up comments
+- State facts, not feelings
 

@@ -53,7 +53,7 @@ When debugging production issues:
 5. **PR** - Create a clear PR explaining what, why, and how
 6. **Code Review** - After creating the PR, add a comment: `@OpenHands /codereview` and wait for feedback
 7. **Address Feedback** - Respond to code review with a commit (or acknowledge if no changes needed)
-8. **CI Check** - Check if CI lint/test jobs are passing. If not, fix and push again.
+8. **CI Check** - Wait for critical CI checks to pass.
 
 ## Code Quality Requirements
 
@@ -79,11 +79,18 @@ Run relevant tests before creating PR:
 - `pytest path/to/test_file.py -v`
 
 ### CI Checks
-After creating a PR, monitor CI status:
-- **Wait for**: Lint jobs, test jobs, and other quick validation checks
-- **DO NOT wait for**: Docker builds, runtime image builds, or any long-running build/image jobs (these can take 40+ minutes and are not relevant to code validation)
-- Consider CI "passed" once all lint and test jobs succeed, even if Docker/build jobs are still running or pending
-- If a lint or test job fails, fix it and push
+After creating a PR, wait for **critical checks** to pass:
+
+**Critical checks** (must pass):
+- Lint jobs (e.g., "Lint python", "Lint frontend", "Lint enterprise python")
+- Test jobs (e.g., "Python Tests", "Enterprise Python Unit Tests")
+
+**Non-critical checks** (do not wait for these):
+- Docker builds and image builds (these take 40+ minutes)
+- Runtime image builds
+- Any build/deploy jobs
+
+Once all critical checks pass, the PR is ready. Do not wait for Docker/build jobs.
 
 ## Communication Style
 
@@ -99,8 +106,8 @@ When creating a PR:
 2. Immediately add comment: `@OpenHands /codereview`
 3. Wait for code review feedback
 4. **Address feedback FIRST** - Push a commit addressing the feedback (or acknowledge if no changes needed)
-5. **THEN check CI** - Check if lint/test jobs are passing and fix any failures
-6. Mark as complete when lint and test jobs pass (do not wait for Docker/build jobs)
+5. **THEN check CI** - Wait for critical checks (lint, tests) to pass. Fix any failures.
+6. Mark as complete when critical checks pass (do not wait for Docker/build jobs)
 
 ## Principles
 
@@ -108,5 +115,5 @@ When creating a PR:
 - Follow existing code patterns exactly
 - Do not change code style (quotes, formatting) unless specifically asked
 - Run the correct linter for the directory you modified
-- Ensure lint and test CI jobs pass before considering the task complete
+- Ensure critical CI checks pass before considering the task complete
 

@@ -47,7 +47,7 @@ When you see errors from a service (e.g., `service:deploy`), clone the correspon
 When debugging production issues:
 
 1. **Investigate** - Query Datadog logs, check Linear/GitHub for context
-2. **Root cause** - Clone the relevant repo, trace the error to its source. If the code lives in a different repo, clone that too. Keep investigating until you find the actual root cause.
+2. **Root cause** - Clone the relevant repo, trace the error to its source. If the code lives in a different repo, clone that too. Keep investigating until you find the actual root cause. Feel free to use error trace file path logs, log tags, helm charts, etc. as clues.
 3. **Fix** - Write minimal, focused code changes following existing patterns
 4. **Validate** - Run linting and tests (see below). Fix any issues before creating PR.
 5. **PR** - Create a clear PR explaining what, why, and how
@@ -65,18 +65,20 @@ When debugging production issues:
 ### Linting
 Before creating a PR, run the appropriate linter for the repo:
 
-**For OpenHands/OpenHands:**
+**NOTE: For OpenHands/OpenHands:**
 - Main code: `pre-commit run --all-files --config ./dev_config/python/.pre-commit-config.yaml`
 - Enterprise code: `cd enterprise && pre-commit run --all-files --config ./dev_config/python/.pre-commit-config.yaml`
 
 **Important:** The enterprise directory has a SEPARATE lint config. If you modify files in `enterprise/`, you MUST run the enterprise linter.
+
+If you're not in the OpenHands directory than try to look for the lint commands in `.pre-commit-config.yaml`, `Makefile`, or CI workflow files to run. MAKE SURE TO ONLY run commands for code that you changed though. If you run lint on the entire repo and change a bunch of unrelated files, you will almost always fail the CI lint job for whatever repo you're trying to change.
 
 ### Tests
 Run relevant tests before creating PR:
 - `pytest path/to/test_file.py -v`
 
 ### CI Failures
-After creating a PR, monitor CI status. If CI fails:
+After creating a PR, wait in a loop and monitor CI status. If CI fails:
 1. Check which job failed using `gh pr checks <PR_NUMBER> --repo <REPO>`
 2. Fix the issue
 3. Push the fix
@@ -86,8 +88,8 @@ After creating a PR, monitor CI status. If CI fails:
 
 - **NO EMOJIS** in PR descriptions, comments, or any text
 - Be concise and professional
-- Do not add celebratory or overly enthusiastic follow-up comments
-- State facts, not feelings
+- Do not add celebratory or overly enthusiastic follow-up comments or PR follow-up comments
+- State facts, code evidence, log evidence, but not feelings
 
 ## PR Workflow
 
@@ -95,9 +97,10 @@ When creating a PR:
 1. Create the PR with a clear description
 2. Immediately add comment: `@OpenHands /codereview`
 3. Wait for code review feedback
-4. Address any feedback
+4. Address any feedback (but use your own reasoning to determine what feedback makes sense and what does not)
 5. Check CI status and fix any failures
-6. Only mark as complete when CI is passing
+6. Wait for CI to fully pass
+7. Only mark as complete when CI is passing
 
 ## Principles
 

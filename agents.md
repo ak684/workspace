@@ -96,11 +96,11 @@ After creating a PR, monitor CI status:
 
 When creating a PR:
 1. Create the PR with a clear description
-2. Immediately add comment: `@OpenHands /codereview-roasted`
+2. Immediately add comment: `@OpenHands /codereview`
 3. Wait for code review feedback
-4. **Address feedback FIRST** - Push a commit addressing the feedback (or acknowledge if no changes needed). Feel free to use your own reasoning to determine what is addressing.
+4. **Address feedback FIRST** - Push a commit addressing the feedback (or simply acknowledge if no code changes needed).
 5. **THEN check CI** - Check if lint/test jobs are passing and fix any failures
-6. Mark as complete when lint and test jobs pass (you do not wait for Docker/build jobs)
+6. Mark as complete when lint and test jobs pass (you do not wait for Docker/build jobs) 
 
 ## Principles
 

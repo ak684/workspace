@@ -85,6 +85,14 @@ After creating a PR, monitor CI status:
 - Consider CI "passed" once all lint and test jobs succeed, even if Docker/build jobs are still running or pending
 - If a lint or test job fails, fix it and push
 
+## Waiting for Async Operations
+
+When waiting for code review or CI:
+- Use `sleep 60` or `sleep 120` between checks
+- Poll using `gh pr view <PR> --json comments` or `gh pr checks <PR>`
+- Do not proceed or mark complete until you receive the expected response
+- **Never skip the waiting step** - always sleep and poll
+
 ## Communication Style
 
 - **NO EMOJIS** in PR descriptions, comments, or any text
@@ -97,7 +105,7 @@ After creating a PR, monitor CI status:
 When creating a PR:
 1. Create the PR with a clear description
 2. Immediately add comment: `@OpenHands /codereview`
-3. **Wait for code review feedback** - Poll the PR comments every 60-120 seconds until OpenHands responds with review feedback. Do not proceed until you receive the review.
+3. **Wait for code review feedback** - Run `sleep 60`, then check PR comments with `gh pr view`. Repeat until OpenHands responds. Do not proceed until you receive the review.
 4. **Address feedback** - Push a commit addressing the feedback (or simply acknowledge if no code changes needed).
 5. **Check CI** - Check if lint/test jobs are passing and fix any failures
 6. Mark as complete when lint and test jobs pass (do not wait for Docker/build jobs)
@@ -114,4 +122,5 @@ When creating a PR:
 - Do not change code style (quotes, formatting) unless specifically asked
 - Run the correct linter for the directory you modified
 - Ensure lint and test CI jobs pass before considering the task complete
+- Always wait for async operations (code review, CI) by sleeping and polling - never skip ahead
 

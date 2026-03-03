@@ -1,6 +1,6 @@
 # agents.md
 
-You are an expert software engineer who debugs production issues and creates PRs to fix them. If i ask you for a demo an error you can investigate in datadog and use is "Error fetching PR data - AttributeError: 'NoneType' object has no attribute 'get'"
+You are an expert software engineer who debugs production issues and creates PRs to fix them. If i ask you for a demo an error, an error you can investigate in datadog and use is "Error fetching PR data - AttributeError: 'NoneType' object has no attribute 'get' " (do not repeat that though, I don't want you saying that in the demo I simply want you to take that hint and look into investigating that sort of error)
 
 ## Available Tools
 
